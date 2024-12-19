@@ -1,9 +1,11 @@
-﻿import {Box, Grid2, InputAdornment, OutlinedInput, Typography} from "@mui/material";
+﻿import {Box, Button, Grid2, InputAdornment, OutlinedInput, Typography} from "@mui/material";
 import PropTypes from 'prop-types';
 import '@fontsource/inter/800.css';
 import EmailIcon from '@mui/icons-material/Email';
 import LockIcon from '@mui/icons-material/Lock';
 import {DatePicker} from "@mui/x-date-pickers";
+import {HorizontalSplit} from "@mui/icons-material";
+import {Link} from "react-router-dom";
 
 const SignUpPresentation = () => {
     return (
@@ -14,7 +16,7 @@ const SignUpPresentation = () => {
                 width: '100%',
                 minHeight: '100vh',
                 display: 'grid',
-                gridTemplateColumns: '2fr 3fr',
+                gridTemplateColumns: '3fr 5fr',
             }}
         >
             <Box
@@ -65,7 +67,7 @@ const SignUpPresentation = () => {
                     variant="h5"
                     fontFamily="Helvetica"
                     sx={{
-                        fontSize: '17px',
+                        fontSize: '12px',
                         fontWeight: 800,
                         color: 'rgb(102,102,102)'
                     }}
@@ -97,20 +99,21 @@ const SignUpPresentation = () => {
                         sx={{
                             fontSize: '15px',
                             fontWeight: 600,
-                            color: 'black'
+                            color: 'rgb(66, 87, 108)'
                         }}
                     >
                         Email
                     </Typography>
+
                     <OutlinedInput
                         required
                         id="outlined-required"
                         placeholder="Enter your email address"
                         variant="outlined"
                         sx={{
+                            maxWidth: '450px',
                             marginTop: '10px',
-                            width: '350px',
-                            marginBottom: '20px',
+                            width: 'calc(100% - 40px)',
                         }}
                         startAdornment={
                             <InputAdornment position="start">
@@ -126,9 +129,10 @@ const SignUpPresentation = () => {
                         variant="h4"
                         fontFamily="Arial"
                         sx={{
+                            marginTop: '10px',
                             fontSize: '15px',
                             fontWeight: 600,
-                            color: 'black'
+                            color: 'rgb(66, 87, 108)'
                         }}
                     >
                         Password
@@ -141,9 +145,9 @@ const SignUpPresentation = () => {
                         placeholder="Enter your password"
                         variant="outlined"
                         sx={{
+                            maxWidth: '450px',
                             marginTop: '10px',
-                            width: '350px',
-                            marginBottom: '20px',
+                            width: 'calc(100% - 40px)',
                         }}
                         startAdornment={
                             <InputAdornment position="start">
@@ -158,12 +162,134 @@ const SignUpPresentation = () => {
                         variant="h4"
                         fontFamily="Arial"
                         sx={{
+                            marginTop: '10px',
                             fontSize: '15px',
                             fontWeight: 600,
-                            color: 'black'
+                            color: 'rgb(66, 87, 108)'
                         }}
                     >Your birth date</Typography>
-                    <DatePicker/>
+
+                    <DatePicker
+                        format="YYYY/MM/DD"
+                        sx={{
+                            maxWidth: '450px',
+                            marginTop: '10px',
+                            width: 'calc(100% - 40px)',
+                            marginBottom: '20px',
+                        }}
+                    />
+                </Box>
+
+                <Box
+                    sx={{
+                        flexDirection: 'row',
+                        display: 'flex',
+                        marginTop: '-3px',
+                    }}
+                >
+                    <Typography
+                        variant="h4"
+                        fontFamily="Arial"
+                        sx={{
+                            fontSize: '12px',
+                            fontWeight: 600,
+                            color: 'rgb(66, 87, 108)'
+                        }}
+                    >
+                        By creating an account, you agree to our
+                    </Typography>
+                    <Link to=''>
+                        <Typography
+                            variant="h4"
+                            fontFamily="Arial"
+                            sx={{
+                                textDecoration: 'underline',
+                                marginLeft: '3px',
+                                fontSize: '12px',
+                                fontWeight: 600,
+                                color: 'rgb(25, 118, 210)'
+                            }}
+                        >
+                            Terms of Service
+                        </Typography>
+                    </Link>
+
+                    <Typography
+                        variant="h4"
+                        fontFamily="Arial"
+                        sx={{
+                            marginLeft: '3px',
+                            fontSize: '12px',
+                            fontWeight: 600,
+                            color: 'rgb(66, 87, 108)'
+                        }}
+                    >
+                        and
+                    </Typography>
+
+                    <Link to=''>
+                        <Typography
+                            variant="h4"
+                            fontFamily="Arial"
+                            sx={{
+                                textDecoration: 'underline',
+                                marginLeft: '3px',
+                                fontSize: '12px',
+                                fontWeight: 600,
+                                color: 'rgb(25, 118, 210)'
+                            }}
+                        >
+                            Privacy Policy
+                        </Typography>
+                    </Link>
+                    <Typography
+                        variant="h4"
+                        fontFamily="Arial"
+                        sx={{
+                            marginLeft: '1px',
+                            fontSize: '12px',
+                            fontWeight: 600,
+                            color: 'rgb(56,155,253)'
+                        }}
+                    >
+                        .
+                    </Typography>
+                </Box>
+
+                <Box
+                    sx={{
+                        marginTop: '40px',
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        width: '100%',
+                    }}
+                >
+                    <Button
+                        variant="contained"
+                        sx={{
+                            backgroundColor: 'rgb(212,217,225)',
+                            color: 'rgb(66, 87, 108)',
+                            fontWeight: 600,
+                            textTransform: 'capitalize',
+                        }}
+                        >
+                        Back
+                    </Button>
+
+                    <Button
+                        variant="contained"
+                        sx={{
+                            backgroundColor: 'rgb(56,155,253)',
+                            color: 'white',
+                            fontWeight: 600,
+                            textTransform: 'capitalize',
+                            marginRight: '30vw',
+                        }}
+                    >
+                        Next
+                    </Button>
                 </Box>
             </Box>
         </Grid2>
