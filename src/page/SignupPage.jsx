@@ -1,18 +1,16 @@
-﻿import axios from "axios";
-import {projectApi} from "../util/axios.js";
-import SignUpPresentation from "../component/AuthContainer/SignUp.presentation.jsx";
+﻿import {projectApi} from "../util/axios.js";
+import SignUpPresentation from "../component/SignUpComponent/Common/SignUp.presentation.jsx";
 
 export function SignupPage() {
+
     const handleSubmit = async (data) => {
-        await axios.post(projectApi + "/api/v1/register", data)
+        await projectApi.post("/api/v1/register", data)
             .then((res => {
                 res
             }))
     }
 
     return (
-        <SignUpPresentation
-            onChange={handleSubmit}
-        />
+        <SignUpPresentation onSubmit={handleSubmit}/>
     )
 }

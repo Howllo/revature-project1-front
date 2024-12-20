@@ -6,6 +6,7 @@ import {SigninPage} from "./page/SigninPage.jsx";
 import {SignupPage} from "./page/SignupPage.jsx";
 import {LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
+import {SignUpProvider} from "./component/SignUpComponent/Context/UseSignup.jsx";
 
 
 function App() {
@@ -13,11 +14,13 @@ function App() {
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <AuthProvider>
             <Router>
-                <Routes>
-                    <Route path="/" element={<HomePage/>}/>
-                    <Route path="/signin" element={<SigninPage/>}/>
-                    <Route path="/signup" element={<SignupPage/>}/>
-                </Routes>
+                <SignUpProvider>
+                    <Routes>
+                        <Route path="/" element={<HomePage/>}/>
+                        <Route path="/signin" element={<SigninPage/>}/>
+                        <Route path="/signup" element={<SignupPage/>}/>
+                    </Routes>
+                </SignUpProvider>
             </Router>
         </AuthProvider>
       </LocalizationProvider>
