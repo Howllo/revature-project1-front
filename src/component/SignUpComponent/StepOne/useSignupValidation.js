@@ -63,17 +63,21 @@ export const useSignupValidation = (formData) => {
     };
 
     const checkEmail = async () => {
+        let inEmail = data.email;
+        if(inEmail.length <= 4){
+            return false;
+        }
         try{
-            const response = await projectApi.get('/users/check/', {
-                data: data.email,
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            });
+            const response = await projectApi.post(`/user/check/email`,
+                { email: inEmail },
+                { headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
             return response.status === 200;
         } catch (e) {
-            if(e.response.status === 403) {
-                console.log(e.response.status);
+            if(e.response.status === 403 || e.response.status === 500) {
+                console.log(`Status Error: ${e.response.status}`);
             }
             return false;
         }

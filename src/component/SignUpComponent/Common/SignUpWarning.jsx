@@ -11,6 +11,7 @@ const SignUpWarning = ({warningType}) => {
             'EMAIL': "Your email appear not to be valid.",
             'PASSWORD': 'Password does not meet requirements.',
             'BIRTHDATE': 'Birthdate does not meet requirements.',
+            'CAPTCHA': 'Please complete the challenge to continue.',
             default: 'Invalid input provided'
         };
         return message[input]
@@ -44,7 +45,7 @@ const SignUpWarning = ({warningType}) => {
             variant="h5"
             fontFamily=""
             sx={{
-                maxWidth: '300px',
+                maxWidth: '350px',
                 marginTop: '1px',
                 marginLeft: '5px',
                 fontSize: '15px',

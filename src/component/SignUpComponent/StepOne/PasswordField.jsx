@@ -5,11 +5,11 @@ import PropTypes from 'prop-types';
 
 export const PasswordField = ({
                                   value = '',
-                                  onChange,
+                                  onChange = () => {},
                                   error = false,
                                   touched = false,
-                                  onBlur
-}) => {
+                                  onBlur = () => {}
+                              }) => {
     const [showPassword, setShowPassword] = useState(false);
 
     return (
@@ -65,12 +65,6 @@ PasswordField.propTypes = {
     onBlur: PropTypes.func,
     error: PropTypes.bool,
     touched: PropTypes.bool,
-};
-
-PasswordField.defaultProps = {
-    value: '',
-    error: false,
-    touched: false,
 };
 
 export default PasswordField;

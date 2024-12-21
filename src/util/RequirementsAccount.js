@@ -1,7 +1,7 @@
 ﻿let PASSWORD_REGEX = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[~`!@#$%^&*()\-_+={}[\]|;:<>,./?]).{8,}$/;
 let EMAIL_REGEX = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+let USERNAME_REGEX = /^[a-zA-Z0-9_-]{3,20}$/;
 let CHECKMARK_USER_REGEX = /^[a-zA-Z0-9_-]{0,}$/;
-let USERNAME_REGEX = /^[a-zA-Z0-9_-]{0,}$/;
 
 let regexEmail = new RegExp(EMAIL_REGEX);
 let regexUsername = new RegExp(USERNAME_REGEX);

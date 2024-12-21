@@ -1,12 +1,36 @@
 ﻿import {Box, Typography} from "@mui/material";
 import {SignUpBackNext} from "../Common/SignUpBackNext.jsx";
-import {SignUpUsername} from "./SignUpUsername.jsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import UsernameField from "./UsernameField.jsx";
+import SignupUsernamePresent from "./SignupUsernamePresent.jsx";
+import {useSignup} from "../Context/UseSignup.jsx";
+import {data} from "react-router-dom";
+import useSignUpTwoValidation from "./useSignUpTwoValidation.js";
 
 export default function StepTwoSignup() {
+    const { setData, step, setStep } = useSignup();
+    const { validateAll } = useSignUpTwoValidation();
     const [username, setUsername] = useState("");
     const yourName = "Your username is @" + username;
+
+    const handleNav = async () => {
+        const isValid = await validateAll();
+
+        if (isValid) {
+            setData({
+                ...data,
+                username: username
+            })
+            setStep(step + 1);
+        }
+    }
+
+    useEffect(() => {
+        setData({
+            ...data,
+            username: username
+        })
+    }, [username, setData]);
 
     return (
         <Box
@@ -52,9 +76,9 @@ export default function StepTwoSignup() {
 
                 <UsernameField username={username} yourName={yourName} setUsername={setUsername}/>
 
-                <SignUpUsername username={username}/>
+                { username.length > 0 ? <SignupUsernamePresent username={username}/> : null }
 
-                <SignUpBackNext/>
+                <SignUpBackNext handleNav={handleNav}/>
             </Box>
         </Box>
     )

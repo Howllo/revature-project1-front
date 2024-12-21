@@ -3,9 +3,22 @@ import '@fontsource/inter/800.css';
 import StepOneSignUp from "../StepOne/StepOneSignUp.jsx";
 import {useSignup} from "../Context/UseSignup.jsx";
 import StepTwoSignup from "../StepTwo/StepTwoSignup.jsx";
+import StepThreeSignup from "../StepThree/StepThreeSignup.jsx";
 
 const SignUpPresentation = () => {
     const { step } = useSignup();
+
+    const handleDisplay = () => {
+        if (step === 1) {
+            return <StepOneSignUp/>
+        } if (step === 2) {
+            return <StepTwoSignup/>
+        } if (step === 3) {
+            return <StepThreeSignup/>
+        } else {
+            return null;
+        }
+    }
 
     return (
         <Grid2
@@ -53,9 +66,7 @@ const SignUpPresentation = () => {
                     We are glad to have you here!
                 </Typography>
             </Box>
-                {
-                    step === 1 ? <StepOneSignUp/> : <StepTwoSignup/>
-                }
+                { handleDisplay() }
         </Grid2>
     )
 }

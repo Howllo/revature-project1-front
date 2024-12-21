@@ -6,11 +6,14 @@ import EmailField from "./EmailField.jsx";
 import PasswordField from "./PasswordField.jsx";
 import SignUpWarning from "../Common/SignUpWarning.jsx";
 import SignUpBackNext from "../Common/SignUpBackNext.jsx";
+import dayjs from "dayjs";
+import {useState} from "react";
 
 export const StepOneSignUp = () => {
     const { data, setData, step, setStep } = useSignup();
     const { errors, touched, errorStatus,
         handleBlur, validateAll } = useSignupValidation(data);
+    const [currentData] = useState(dayjs().subtract(18, 'years'))
 
     const handleEmailChange = (e) => {
         setData({
@@ -101,7 +104,9 @@ export const StepOneSignUp = () => {
                 required
                 format="YYYY/MM/DD"
                 value={data.birthdate}
+                error={errors.birthdate}
                 onChange={handleBirthDateChange}
+                defaultValue={currentData}
                 slotProps={{
                     textField: {
                         required: true,

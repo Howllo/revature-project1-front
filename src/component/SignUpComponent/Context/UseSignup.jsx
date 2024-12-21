@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import {useLocation} from "react-router-dom";
 
 const UseSignup = createContext(null);
+// eslint-disable-next-line react-refresh/only-export-components
 export const useSignup = () => useContext(UseSignup);
 
 export const SignUpProvider = ({ children }) => {
@@ -11,6 +12,7 @@ export const SignUpProvider = ({ children }) => {
         email: "",
         birthdate: null,
         password: "",
+        captchaToken: null,
     });
     const [step, setStep] = useState(1);
     const [isUsernameAvailable, setUsernameAvailable] = useState(false);
@@ -28,11 +30,11 @@ export const SignUpProvider = ({ children }) => {
                 email: "",
                 birthdate: null,
                 password: "",
+                captchaToken: null,
             });
             setUsernameAvailable(false);
             setIsEmailValidated(false);
             setIsPasswordValidated(false);
-
         }
     }, [location]);
 

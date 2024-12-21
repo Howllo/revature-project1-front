@@ -2,7 +2,13 @@
 import EmailIcon from "@mui/icons-material/Email";
 import PropTypes from 'prop-types';
 
-export const EmailField = ({ value, onChange, error, touched, onBlur }) => {
+export const EmailField = ({
+                               value = '',
+                               onChange = () => {},
+                               error = false,
+                               touched = false,
+                               onBlur = () => {}
+}) => {
     return (
         <Box>
             <Typography

@@ -1,23 +1,48 @@
-﻿import {Box, Button, Typography} from "@mui/material";
-import {Link, useNavigate} from "react-router-dom";
-import {HorizontalRule} from "@mui/icons-material";
+﻿import { Box, Button, Typography } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
+import { HorizontalRule } from "@mui/icons-material";
 import SelectLanguage from "../../LanguageChoose/SelectLanguage.jsx";
-import {useSignup} from "../Context/UseSignup.jsx";
+import { useSignup } from "../Context/UseSignup.jsx";
+import { useEffect, useState } from "react";
+import useSignupThreeValidation from "../StepThree/useSignupThreeValidation.js";
+import PropTypes from 'prop-types';
 
-// eslint-disable-next-line react/prop-types
-export function SignUpBackNext({handleNav}) {
-    const {step, setStep } = useSignup();
+export function SignUpBackNext({ handleNav, captchaSecurity }) {
+    const { step, setStep, data } = useSignup();
+    const [showButton, setShowButton] = useState(false);
     const navigate = useNavigate();
+    const { getCaptchaInfo } = useSignupThreeValidation();
 
     const handleBack = () => {
-        if(step > 1) {
+        if (step > 1) {
             setStep(step - 1);
         }
 
-        if(step === 1) {
+        if (step === 1) {
             navigate('/');
         }
     }
+
+    useEffect(() => {
+        if (captchaSecurity === undefined) {
+                setShowButton(true);
+            }
+    }, [step, captchaSecurity]);
+
+    useEffect(() => {
+        if (step === 3 && data.captchaToken !== '') {
+            const checkCaptcha = async () => {
+                const result = await getCaptchaInfo();
+                setShowButton(result);
+            }
+            checkCaptcha();
+        }
+
+        if (step === 3 && data.captchaToken === '') {
+            setShowButton(false);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [data.captchaToken, getCaptchaInfo(), step]);
 
     return (
         <Box>
@@ -45,19 +70,22 @@ export function SignUpBackNext({handleNav}) {
                     Back
                 </Button>
 
-                <Button
-                    variant="contained"
-                    onClick={handleNav}
-                    sx={{
-                        backgroundColor: 'rgb(56,155,253)',
-                        color: 'white',
-                        fontWeight: 600,
-                        textTransform: 'capitalize',
-                    }}
-                >
-                    Next
-                </Button>
+                {showButton && (
+                    <Button
+                        variant="contained"
+                        onClick={handleNav}
+                        sx={{
+                            backgroundColor: 'rgb(56,155,253)',
+                            color: 'white',
+                            fontWeight: 600,
+                            textTransform: 'capitalize',
+                        }}
+                    >
+                        Next
+                    </Button>
+                )}
             </Box>
+
             <Box
                 sx={{
                     marginTop: '10px',
@@ -82,7 +110,7 @@ export function SignUpBackNext({handleNav}) {
                     marginTop: '-10px',
                 }}
             >
-                <SelectLanguage/>
+                <SelectLanguage />
 
                 <Box
                     sx={{
@@ -123,7 +151,12 @@ export function SignUpBackNext({handleNav}) {
                 </Box>
             </Box>
         </Box>
-    )
+    );
 }
+
+SignUpBackNext.propTypes = {
+    handleNav: PropTypes.func.isRequired,
+    captchaSecurity: PropTypes.bool,
+};
 
 export default SignUpBackNext;
