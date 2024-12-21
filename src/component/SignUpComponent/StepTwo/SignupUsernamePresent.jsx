@@ -14,7 +14,6 @@ export default function SignupUsernamePresent({username}) {
     }, [username]);
 
     const getCorrectIcon = () =>{
-        console.log(isValidUsername)
         if(isValidUsername === true){
             return (
                 <DoneIcon sx={{

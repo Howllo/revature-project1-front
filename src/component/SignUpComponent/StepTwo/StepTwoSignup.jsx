@@ -1,8 +1,8 @@
-﻿import {Box, InputAdornment, OutlinedInput, Typography} from "@mui/material";
-import AlternateEmail from '@mui/icons-material/AlternateEmail';
+﻿import {Box, Typography} from "@mui/material";
 import {SignUpBackNext} from "../Common/SignUpBackNext.jsx";
 import {SignUpUsername} from "./SignUpUsername.jsx";
 import {useState} from "react";
+import UsernameField from "./UsernameField.jsx";
 
 export default function StepTwoSignup() {
     const [username, setUsername] = useState("");
@@ -50,41 +50,7 @@ export default function StepTwoSignup() {
                     Choose a username
                 </Typography>
 
-                <OutlinedInput
-                    required
-                    type="email"
-                    id="outlined-required"
-                    className={'email'}
-                    placeholder="Enter your username"
-                    variant="outlined"
-                    onChange={(e) => setUsername(e.target.value)}
-                    sx={{
-                        maxWidth: '450px',
-                        marginTop: '10px',
-                        width: '100%',
-                    }}
-                    startAdornment={
-                        <InputAdornment position="start">
-                            <AlternateEmail/>
-                        </InputAdornment>
-                    }
-                />
-
-                <Typography
-                    variant="h5"
-                    fontFamily=""
-                    sx={{
-                        marginTop: '10px',
-                        fontSize: '15px',
-                        fontHeight: 'bold',
-                        fontWeight: 600,
-                        color: 'rgb(102,102,102)'
-                    }}
-                >
-                    {
-                        username !== '' ? yourName : null
-                    }
-                </Typography>
+                <UsernameField username={username} yourName={yourName} setUsername={setUsername}/>
 
                 <SignUpUsername username={username}/>
 

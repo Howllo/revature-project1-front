@@ -3,7 +3,13 @@ import { Visibility, VisibilityOff, Lock } from "@mui/icons-material";
 import { useState } from "react";
 import PropTypes from 'prop-types';
 
-export const PasswordField = ({ value, onChange, error, touched, onBlur }) => {
+export const PasswordField = ({
+                                  value = '',
+                                  onChange,
+                                  error = false,
+                                  touched = false,
+                                  onBlur
+}) => {
     const [showPassword, setShowPassword] = useState(false);
 
     return (

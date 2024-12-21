@@ -33,8 +33,9 @@ export const StepOneSignUp = () => {
         });
     };
 
-    const handleNav = () => {
-        if (validateAll()) {
+    const handleNav = async () => {
+        const isValid = await validateAll();
+        if (isValid) {
             setStep(step + 1);
         }
     };

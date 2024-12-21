@@ -1,7 +1,11 @@
 ﻿import { useState, useEffect } from 'react';
 import { RequirementsEmail, RequirementsPassword } from '../../../util/RequirementsAccount.js';
+import {projectApi} from "../../../util/axios.js";
+import {useSignup} from "../Context/UseSignup.jsx";
 
 export const useSignupValidation = (formData) => {
+    const { data } = useSignup();
+
     const [errors, setErrors] = useState({
         email: false,
         password: false,
@@ -34,7 +38,7 @@ export const useSignupValidation = (formData) => {
         }));
     };
 
-    const validateAll = () => {
+    const validateAll = async () => {
         const allTouched = {
             email: true,
             password: true,
@@ -43,8 +47,9 @@ export const useSignupValidation = (formData) => {
 
         const validEmail = RequirementsEmail(formData.email);
         const validPassword = RequirementsPassword(formData.password);
+        const isEmailAllowed = await checkEmail();
 
-        if (!validEmail) {
+        if (!validEmail || !isEmailAllowed ) {
             setErrorStatus('EMAIL');
         } else if (!validPassword) {
             setErrorStatus('PASSWORD');
@@ -56,6 +61,23 @@ export const useSignupValidation = (formData) => {
 
         return validEmail && validPassword && formData.birthdate;
     };
+
+    const checkEmail = async () => {
+        try{
+            const response = await projectApi.get('/users/check/', {
+                data: data.email,
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            return response.status === 200;
+        } catch (e) {
+            if(e.response.status === 403) {
+                console.log(e.response.status);
+            }
+            return false;
+        }
+    }
 
     return {
         errors,

@@ -32,20 +32,18 @@ export function SignUpBackNext({handleNav}) {
                     width: '100%',
                 }}
             >
-                <Link to={'/'}>
-                    <Button
-                        variant="contained"
-                        onClick={handleBack}
-                        sx={{
-                            backgroundColor: 'rgb(212,217,225)',
-                            color: 'rgb(66, 87, 108)',
-                            fontWeight: 600,
-                            textTransform: 'capitalize',
-                        }}
-                    >
-                        Back
-                    </Button>
-                </Link>
+                <Button
+                    variant="contained"
+                    onClick={handleBack}
+                    sx={{
+                        backgroundColor: 'rgb(212,217,225)',
+                        color: 'rgb(66, 87, 108)',
+                        fontWeight: 600,
+                        textTransform: 'capitalize',
+                    }}
+                >
+                    Back
+                </Button>
 
                 <Button
                     variant="contained"
