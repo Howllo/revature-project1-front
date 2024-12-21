@@ -3,6 +3,41 @@ import {useSignup} from "../Context/UseSignup.jsx";
 
 export const useSignupThreeValidation = () => {
     const { data } = useSignup();
+    const { step, setStep } = useSignup();
+
+    const handleNav = async () => {
+        const result = await handleSubmitRegister();
+        if(result) {
+            setStep(step + 1);
+        }
+    }
+
+    const handleSubmitRegister = async () => {
+        if(data.email === "" || data.password === "" || data.username === "" || data.birthdate === ""){
+            return false;
+        }
+
+        try {
+            const response = await projectApi.post("/auth/register",
+                {
+                    email: data.email,
+                    username: data.username,
+                    password: data.password,
+                    birthdate: data.birthdate,
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                }
+            )
+            console.log(`The Status Was: ${response.status}`);
+            return response.status === 200;
+        } catch (error) {
+            console.log(`Status Error: ${error.status}`);
+            return false;
+        }
+    }
 
     const getCaptchaInfo = async () => {
         if(data.captchaToken === "" || data.captchaToken === null || data.captchaToken === undefined){
@@ -26,7 +61,9 @@ export const useSignupThreeValidation = () => {
     }
 
     return {
+        handleNav,
         getCaptchaInfo,
+        handleSubmitRegister
     }
 };
 

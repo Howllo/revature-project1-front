@@ -24,10 +24,10 @@ export const EmailField = ({
             </Typography>
             <OutlinedInput
                 required
+                value={value}
                 type="email"
                 className="email"
                 placeholder="Enter your email address"
-                value={value}
                 error={!error && touched}
                 onBlur={onBlur}
                 onChange={onChange}

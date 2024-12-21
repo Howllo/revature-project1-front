@@ -13,12 +13,15 @@ export function SignUpBackNext({ handleNav, captchaSecurity }) {
     const navigate = useNavigate();
     const { getCaptchaInfo } = useSignupThreeValidation();
 
-    const handleBack = () => {
-        if (step > 1) {
+    const handleBack = (e) => {
+        e.preventDefault();
+
+        if (step > 0) {
             setStep(step - 1);
+            return;
         }
 
-        if (step === 1) {
+        if (step === 0) {
             navigate('/');
         }
     }
@@ -42,7 +45,7 @@ export function SignUpBackNext({ handleNav, captchaSecurity }) {
             setShowButton(false);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [data.captchaToken, getCaptchaInfo(), step]);
+    }, [data.captchaToken]);
 
     return (
         <Box>

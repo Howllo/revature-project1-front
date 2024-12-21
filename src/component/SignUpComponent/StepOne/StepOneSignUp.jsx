@@ -1,4 +1,4 @@
-﻿import { Box, Typography } from "@mui/material";
+﻿import {Box, Typography} from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers";
 import { useSignup } from '../Context/UseSignup.jsx';
 import useSignupValidation from "./useSignupValidation.js";
@@ -13,7 +13,7 @@ export const StepOneSignUp = () => {
     const { data, setData, step, setStep } = useSignup();
     const { errors, touched, errorStatus,
         handleBlur, validateAll } = useSignupValidation(data);
-    const [currentData] = useState(dayjs().subtract(18, 'years'))
+    const [currentData] = useState(dayjs().subtract(18, 'years'));
 
     const handleEmailChange = (e) => {
         setData({
@@ -38,7 +38,7 @@ export const StepOneSignUp = () => {
 
     const handleNav = async () => {
         const isValid = await validateAll();
-        if (isValid) {
+        if (isValid && data.email  && data.password && data.birthdate) {
             setStep(step + 1);
         }
     };
@@ -73,16 +73,16 @@ export const StepOneSignUp = () => {
             {errorStatus && <SignUpWarning warningType={errorStatus} />}
 
             <EmailField
-                value={data.email}
-                onChange={handleEmailChange}
+                value={data.email || ''}
+                onChange={(e) => handleEmailChange(e)}
                 error={errors.email}
                 touched={touched.email}
                 onBlur={() => handleBlur('email')}
             />
 
             <PasswordField
-                value={data.password}
-                onChange={handlePasswordChange}
+                value={data.password || ''}
+                onChange={(e) => handlePasswordChange(e)}
                 error={errors.password}
                 touched={touched.password}
                 onBlur={() => handleBlur('password')}
@@ -105,7 +105,8 @@ export const StepOneSignUp = () => {
                 format="YYYY/MM/DD"
                 value={data.birthdate}
                 error={errors.birthdate}
-                onChange={handleBirthDateChange}
+                onChange={(e) => handleBirthDateChange(e)}
+                onBlur={() => handleBlur('birthdate')}
                 defaultValue={currentData}
                 slotProps={{
                     textField: {

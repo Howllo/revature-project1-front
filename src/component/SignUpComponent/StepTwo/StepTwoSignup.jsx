@@ -1,54 +1,31 @@
 ﻿import {Box, Typography} from "@mui/material";
 import {SignUpBackNext} from "../Common/SignUpBackNext.jsx";
-import {useEffect, useState} from "react";
-import UsernameField from "./UsernameField.jsx";
+import {UsernameField} from "./UsernameField.jsx";
 import SignupUsernamePresent from "./SignupUsernamePresent.jsx";
 import {useSignup} from "../Context/UseSignup.jsx";
-import {data} from "react-router-dom";
 import useSignUpTwoValidation from "./useSignUpTwoValidation.js";
 
 export default function StepTwoSignup() {
-    const { setData, step, setStep } = useSignup();
+    const { data, step, setStep } = useSignup();
     const { validateAll } = useSignUpTwoValidation();
-    const [username, setUsername] = useState("");
-    const yourName = "Your username is @" + username;
 
     const handleNav = async () => {
         const isValid = await validateAll();
-
         if (isValid) {
-            setData({
-                ...data,
-                username: username
-            })
             setStep(step + 1);
         }
     }
 
-    useEffect(() => {
-        setData({
-            ...data,
-            username: username
-        })
-    }, [username, setData]);
-
     return (
-        <Box
-            sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'left',
-                justifyContent: 'center',
-                backgroundColor: 'white',
-                paddingLeft: '60px',
-
-            }}
-        >
-            <Box
-                sx={{
-                    marginRight: '200px'
-                }}
-            >
+        <Box sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'left',
+            justifyContent: 'center',
+            backgroundColor: 'white',
+            paddingLeft: '60px',
+        }}>
+            <Box sx={{ marginRight: '200px' }}>
                 <Typography
                     variant="h5"
                     fontFamily="Arial"
@@ -74,9 +51,12 @@ export default function StepTwoSignup() {
                     Choose a username
                 </Typography>
 
-                <UsernameField username={username} yourName={yourName} setUsername={setUsername}/>
+                <UsernameField />
 
-                { username.length > 0 ? <SignupUsernamePresent username={username}/> : null }
+                {data.username && data.username.length > 0 ?
+                    <SignupUsernamePresent username={data.username}/>
+                    : null
+                }
 
                 <SignUpBackNext handleNav={handleNav}/>
             </Box>

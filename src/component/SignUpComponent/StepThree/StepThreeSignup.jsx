@@ -3,13 +3,12 @@ import HCaptcha from "./HCaptchaComponent.jsx";
 import SignUpBackNext from "../Common/SignUpBackNext.jsx";
 import SignUpWarning from "../Common/SignUpWarning.jsx";
 import {useState} from "react";
+import useSignupThreeValidation from "./useSignupThreeValidation.js";
 
 const StepThreeSignup = () => {
     const [failCaptcha, setFailCaptcha] = useState(false);
     const [touchCaptcha, setTouchCaptcha] = useState(false);
-    const handleNav = () => {
-
-    }
+    const { handleNav } = useSignupThreeValidation();
 
     return (
         <Box

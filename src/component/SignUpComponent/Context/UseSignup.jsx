@@ -20,10 +20,11 @@ export const SignUpProvider = ({ children }) => {
     const [isEmailAllowed, setIsEmailAllowed] = useState()
     const [isPasswordValidated, setIsPasswordValidated] = useState();
 
-    // Reset the state.
     const location = useLocation();
     useEffect(() => {
-        if(!location.pathname.includes("signup")) {
+        const isLeavingSignup = !location.pathname.includes("signup") && data.email !== "";
+
+        if(isLeavingSignup) {
             setStep(1);
             setData({
                 username: "",
@@ -36,7 +37,7 @@ export const SignUpProvider = ({ children }) => {
             setIsEmailValidated(false);
             setIsPasswordValidated(false);
         }
-    }, [location]);
+    }, [location, data.email]);
 
     const value = {
         data,
