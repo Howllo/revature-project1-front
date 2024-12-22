@@ -1,9 +1,9 @@
 ﻿import '@fontsource/inter/800.css';
 import {Box, Grid2, Typography} from "@mui/material";
-import StepOneSignUp from "../Component/SignUpComponent/StepOne/StepOneSignUp.jsx";
-import {useSignup} from "../Component/SignUpComponent/Context/UseSignup.jsx";
-import StepTwoSignup from "../Component/SignUpComponent/StepTwo/StepTwoSignup.jsx";
-import StepThreeSignup from "../Component/SignUpComponent/StepThree/StepThreeSignup.jsx";
+import {useSignup} from "../component/SignUpComponent/Context/UseSignup.jsx";
+import StepOneSignUp from "../component/SignUpComponent/StepOne/StepOneSignUp.jsx";
+import StepTwoSignup from "../component/SignUpComponent/StepTwo/StepTwoSignup.jsx";
+import StepThreeSignup from "../component/SignUpComponent/StepThree/StepThreeSignup.jsx";
 import { useNavigate } from "react-router-dom";
 
 export function SignupPage() {
