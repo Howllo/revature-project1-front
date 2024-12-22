@@ -37,7 +37,7 @@ export const PasswordField = ({
                 sx={{
                     maxWidth: '450px',
                     marginTop: '10px',
-                    width: 'calc(100% - 40px)',
+                    width: '100%',
                 }}
                 startAdornment={
                     <InputAdornment position="start">

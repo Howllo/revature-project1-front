@@ -1,9 +1,12 @@
 ﻿import {projectApi} from "../../../util/axios.js";
 import {useSignup} from "../Context/UseSignup.jsx";
+import Cookies from "js-cookie";
+import {useAuth} from "../../../util/auth/AuthProvider.jsx";
+import axios from "axios";
 
 export const useSignupThreeValidation = () => {
-    const { data } = useSignup();
-    const { step, setStep } = useSignup();
+    const { data, step, setStep  } = useSignup();
+    const { setIsAuthenticated } =  useAuth();
 
     const handleNav = async () => {
         const result = await handleSubmitRegister();
@@ -31,10 +34,23 @@ export const useSignupThreeValidation = () => {
                     }
                 }
             )
-            console.log(`The Status Was: ${response.status}`);
-            return response.status === 200;
+
+            Cookies.set('jwtToken', response.data.token, { expires: 7 });
+            Cookies.set('username', response.data.username, { expires: 7 });
+            Cookies.set('profile_pic', response.data.profilePicture, { expires: 7 });
+
+            if(Cookies.get('jwtToken') !== undefined){
+                axios.defaults.headers.common['Authorization'] = Cookies.get('jwtToken');
+                setIsAuthenticated(true);
+            }
+            return response.status === 201 || response.status === 200;
         } catch (error) {
-            console.log(`Status Error: ${error.status}`);
+            if(error.response && error.response.data.message){
+                console.log(`Status Error: ${error.status} - ${error.response.data.message}`);
+            } else {
+                console.log(`Status Error: ${error.status}`);
+            }
+
             return false;
         }
     }

@@ -51,6 +51,7 @@ export const StepOneSignUp = () => {
             justifyContent: 'center',
             backgroundColor: 'white',
             paddingLeft: '60px',
+            paddingRight: '40px',
         }}>
             <Typography variant="h5"
                         sx={{

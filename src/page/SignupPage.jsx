@@ -5,10 +5,17 @@ import StepOneSignUp from "../component/SignUpComponent/StepOne/StepOneSignUp.js
 import StepTwoSignup from "../component/SignUpComponent/StepTwo/StepTwoSignup.jsx";
 import StepThreeSignup from "../component/SignUpComponent/StepThree/StepThreeSignup.jsx";
 import { useNavigate } from "react-router-dom";
+import {useEffect} from "react";
 
 export function SignupPage() {
     const { step } = useSignup();
-    const navigator = useNavigate();
+    const navigate  = useNavigate();
+
+    useEffect(() => {
+        if (step !== 1 && step !== 2 && step !== 3) {
+            navigate('/');
+        }
+    }, [step, navigate]);
 
     const handleDisplay = () => {
         if (step === 1) {
@@ -18,7 +25,7 @@ export function SignupPage() {
         } if (step === 3) {
             return <StepThreeSignup/>
         } else {
-            navigator('/');
+            return null;
         }
     }
 

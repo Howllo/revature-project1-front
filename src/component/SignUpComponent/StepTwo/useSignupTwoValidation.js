@@ -2,13 +2,12 @@
 import {projectApi} from "../../../util/axios.js";
 import {RequirementsUsername} from "../../../util/RequirementsAccount.js";
 
-export const useSignUpTwoValidation = () => {
+export const useSignupTwoValidation = () => {
     const { data } = useSignup();
 
     const validateAll = async () => {
         const isUsernameAllowed = await checkUsername();
         const isValidUsername = RequirementsUsername(data.username);
-
         return !(!isValidUsername || !isUsernameAllowed);
     }
 
@@ -25,8 +24,9 @@ export const useSignUpTwoValidation = () => {
     }
 
     return {
-        validateAll,
+        checkUsername,
+        validateAll
     }
 }
 
-export default useSignUpTwoValidation;
+export default useSignupTwoValidation;
