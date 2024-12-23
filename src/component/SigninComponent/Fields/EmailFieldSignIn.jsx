@@ -1,6 +1,5 @@
 ﻿import { OutlinedInput, InputAdornment, Box } from "@mui/material";
 import EmailIcon from "@mui/icons-material/Email";
-import PropTypes from "prop-types";
 
 export const EmailFieldSignIn = ({email, setEmail}) => {
     const handleEmailChange = (e) => {
@@ -30,6 +29,8 @@ export const EmailFieldSignIn = ({email, setEmail}) => {
         </Box>
     );
 };
+
+import PropTypes from 'prop-types';
 
 EmailFieldSignIn.propTypes = {
     email: PropTypes.string.isRequired,

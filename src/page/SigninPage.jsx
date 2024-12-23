@@ -3,10 +3,13 @@ import SignInNavigator from "../component/SigninComponent/SignInNavigator.jsx";
 import EmailFieldSignIn from "../component/SigninComponent/Fields/EmailFieldSignIn.jsx";
 import PasswordFieldSignIn from "../component/SigninComponent/Fields/PasswordFieldSignIn.jsx";
 import {useState} from "react";
+import useSignIn from "../component/SigninComponent/Context/UseSignin.jsx";
+import AuthWarning from "../component/AuthCommon/AuthWarning.jsx";
 
 export function SigninPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const { credentialsInvalid } = useSignIn();
 
     return (
         <Grid2
@@ -63,10 +66,13 @@ export function SigninPage() {
                 paddingLeft: '60px',
                 paddingRight: '40px',
             }}>
+
+                {credentialsInvalid && <AuthWarning warningType={'AUTH_INVALID'}/> }
+
                 <Typography
                     variant="h4"
                     sx={{
-                        marginTop: '10px',
+                        marginTop: '15px',
                         fontSize: '15px',
                         fontWeight: 600,
                         color: 'rgb(66, 87, 108)'

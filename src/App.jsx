@@ -7,6 +7,7 @@ import {SignupPage} from "./page/SignupPage.jsx";
 import {LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {SignUpProvider} from "./component/SignUpComponent/Context/UseSignup.jsx";
+import {SighInProvider} from "./component/SigninComponent/Context/SignInProvider.jsx";
 
 
 function App() {
@@ -15,11 +16,13 @@ function App() {
         <AuthProvider>
             <Router>
                 <SignUpProvider>
-                    <Routes>
-                        <Route path="/" element={<HomePage/>}/>
-                        <Route path="/signin" element={<SigninPage/>}/>
-                        <Route path="/signup" element={<SignupPage/>}/>
-                    </Routes>
+                    <SighInProvider>
+                        <Routes>
+                            <Route path="/" element={<HomePage/>}/>
+                            <Route path="/signin" element={<SigninPage/>}/>
+                            <Route path="/signup" element={<SignupPage/>}/>
+                        </Routes>
+                    </SighInProvider>
                 </SignUpProvider>
             </Router>
         </AuthProvider>

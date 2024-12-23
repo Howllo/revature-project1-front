@@ -3,11 +3,29 @@ import Cookies from "js-cookie";
 import {useNavigate} from "react-router-dom";
 import {projectApi} from "../../util/axios.js";
 import useAuth from "../../util/auth/UseAuth.jsx";
+import useSignIn from "./Context/UseSignin.jsx";
 
 export const useSignInValidation = () => {
     let navigate  = useNavigate();
     const { setIsAuthenticated } = useAuth();
+    const { setCredentialsInvalid } = useSignIn();
 
+    const setCookieOnBadRequest = () => {
+        setIsAuthenticated(false);
+        Cookies.remove('jwt');
+        Cookies.remove('username');
+    }
+
+    const handleSubmit = async (email, password) => {
+        const result = await validateAll(email, password);
+        if(result) {
+            navigate('/');
+        }
+    }
+
+    const handleBack = () => {
+        navigate('/');
+    }
 
     const validateAll = async (email, password) => {
         if(email === "" || password === ""){
@@ -30,6 +48,9 @@ export const useSignInValidation = () => {
             );
 
             if(response.status !== 200) {
+                console.log(`Status Error: ${response.status} - ${response.data.message}`);
+                setCookieOnBadRequest();
+                setCredentialsInvalid(true);
                 return false;
             }
 
@@ -65,22 +86,12 @@ export const useSignInValidation = () => {
 
             return response.status === 200;
         } catch (e) {
+            console.log(`Status Error: ${e.response.status}`);
             setIsAuthenticated(false);
-            Cookies.remove('jwt');
-            console.log(e.response.status);
+            setCredentialsInvalid(true);
+            setCookieOnBadRequest();
             return false;
         }
-    }
-
-    const handleSubmit = async (email, password) => {
-        const result = await validateAll(email, password);
-        if(result) {
-            navigate('/');
-        }
-    }
-
-    const handleBack = () => {
-        navigate('/');
     }
 
     return {
