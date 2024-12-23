@@ -19,6 +19,7 @@ export default function SelectLanguage() {
         >
             <FormControl sx={{ minWidth: 120 }} size="small">
                 <Select
+                    variant='outlined'
                     onChange={(e) => setLanguage(e.target.value)}
                     defaultValue={language}
                     sx = {{
@@ -31,7 +32,7 @@ export default function SelectLanguage() {
                             border: 'none'
                         }
                     }}
-                 variant="outline">
+                >
                     <MenuItem value={'en-US'}>English (US)</MenuItem>
                     <MenuItem value={'en-GB'}>English (UK)</MenuItem>
                     <MenuItem value={'zh'}>中文 – Chinese</MenuItem>

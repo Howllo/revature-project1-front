@@ -3,7 +3,7 @@ import {Box, Typography} from "@mui/material";
 import PropTypes from "prop-types";
 import {useEffect, useState} from "react";
 
-const SignUpWarning = ({warningType}) => {
+const AuthWarning = ({warningType}) => {
     const [updateText, setUpdateText] = useState()
     
     const getWarningMessage = (input) => {
@@ -12,6 +12,7 @@ const SignUpWarning = ({warningType}) => {
             'PASSWORD': 'Password does not meet requirements.',
             'BIRTHDATE': 'Birthdate does not meet requirements.',
             'CAPTCHA': 'Please complete the challenge to continue.',
+            'AUTH_INVALID': "Either your email or password is incorrect.",
             default: 'Invalid input provided'
         };
         return message[input]
@@ -60,8 +61,8 @@ const SignUpWarning = ({warningType}) => {
     )
 }
 
-SignUpWarning.propTypes = {
+AuthWarning.propTypes = {
     warningType: PropTypes.string.isRequired,
 };
 
-export default SignUpWarning;
+export default AuthWarning;

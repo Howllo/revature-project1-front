@@ -1,7 +1,7 @@
 ﻿import {Box, Typography} from "@mui/material";
 import HCaptcha from "./HCaptchaComponent.jsx";
 import SignUpBackNext from "../Common/SignUpBackNext.jsx";
-import SignUpWarning from "../Common/SignUpWarning.jsx";
+import AuthWarning from "../../AuthCommon/AuthWarning.jsx";
 import {useState} from "react";
 import useSignupThreeValidation from "./useSignupThreeValidation.js";
 
@@ -57,7 +57,7 @@ const StepThreeSignup = () => {
                         marginTop: '20px',
                     }}
                 >
-                    {(failCaptcha || touchCaptcha) && <SignUpWarning warningType={'CAPTCHA'}/> }
+                    {(failCaptcha || touchCaptcha) && <AuthWarning warningType={'CAPTCHA'}/> }
                 </Box>
                 
                 <HCaptcha setFailCaptcha={setFailCaptcha} setTouchCaptcha={setTouchCaptcha}/>

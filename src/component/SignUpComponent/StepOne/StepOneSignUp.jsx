@@ -4,7 +4,7 @@ import { useSignup } from '../Context/UseSignup.jsx';
 import useSignupValidation from "./useSignupValidation.js";
 import EmailField from "./EmailField.jsx";
 import PasswordField from "./PasswordField.jsx";
-import SignUpWarning from "../Common/SignUpWarning.jsx";
+import AuthWarning from "../../AuthCommon/AuthWarning.jsx";
 import SignUpBackNext from "../Common/SignUpBackNext.jsx";
 import dayjs from "dayjs";
 import {useState} from "react";
@@ -71,7 +71,7 @@ export const StepOneSignUp = () => {
                 }}
             >Create Account</Typography>
 
-            {errorStatus && <SignUpWarning warningType={errorStatus} />}
+            {errorStatus && <AuthWarning warningType={errorStatus} />}
 
             <EmailField
                 value={data.email || ''}
