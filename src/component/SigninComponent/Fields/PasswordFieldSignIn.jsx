@@ -1,40 +1,25 @@
-﻿import { OutlinedInput, InputAdornment, IconButton, Typography, Box } from "@mui/material";
-import { Visibility, VisibilityOff, Lock } from "@mui/icons-material";
-import { useState } from "react";
-import PropTypes from 'prop-types';
+﻿import {Box, IconButton, InputAdornment, OutlinedInput} from "@mui/material";
+import {Visibility, VisibilityOff, Lock} from "@mui/icons-material";
+import {useState} from "react";
+import PropTypes from "prop-types";
 import Tooltip from '@mui/material/Tooltip';
 
-export const PasswordField = ({
-                                  value = '',
-                                  onChange = () => {},
-                                  error = false,
-                                  touched = false,
-                                  onBlur = () => {}
-                              }) => {
+const PasswordFieldSignIn = ({password, setPassword}) => {
     const [showPassword, setShowPassword] = useState(false);
+
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value)
+    }
 
     return (
         <Box>
-            <Typography
-                variant="h4"
-                sx={{
-                    marginTop: '10px',
-                    fontSize: '15px',
-                    fontWeight: 600,
-                    color: 'rgb(66, 87, 108)'
-                }}
-            >
-                Password
-            </Typography>
             <OutlinedInput
                 required
                 type={showPassword ? 'text' : 'password'}
                 className="password"
                 placeholder="Enter your password"
-                value={value}
-                error={!error && touched}
-                onBlur={onBlur}
-                onChange={onChange}
+                value={password}
+                onChange={(e) => handlePasswordChange(e)}
                 sx={{
                     maxWidth: '450px',
                     marginTop: '10px',
@@ -59,15 +44,12 @@ export const PasswordField = ({
                 }
             />
         </Box>
-    );
+    )
+}
+
+PasswordFieldSignIn.propTypes = {
+    password: PropTypes.string.isRequired,
+    setPassword: PropTypes.func.isRequired,
 };
 
-PasswordField.propTypes = {
-    value: PropTypes.string,
-    onChange: PropTypes.func,
-    onBlur: PropTypes.func,
-    error: PropTypes.bool,
-    touched: PropTypes.bool,
-};
-
-export default PasswordField;
+export default PasswordFieldSignIn;

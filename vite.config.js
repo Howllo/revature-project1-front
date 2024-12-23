@@ -6,5 +6,8 @@ export default defineConfig({
   plugins: [react()],
     resolve: {
         dedupe: ['@emotion/react', '@emotion/styled']
+    },
+    build: {
+        sourcemap: true
     }
 })

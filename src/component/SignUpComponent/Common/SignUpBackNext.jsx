@@ -110,7 +110,7 @@ export function SignUpBackNext({ handleNav, captchaSecurity }) {
                     display: 'flex',
                     alignItems: 'center',
                     flexDirection: 'row',
-                    marginTop: '-10px',
+                    marginTop: '3px',
                 }}
             >
                 <SelectLanguage />
@@ -127,7 +127,7 @@ export function SignUpBackNext({ handleNav, captchaSecurity }) {
                         variant="h4"
                         fontFamily="Arial"
                         sx={{
-                            marginLeft: '1px',
+                            marginLeft: '20px',
                             fontSize: '12px',
                             fontWeight: 600,
                             maxWidth: '100px',

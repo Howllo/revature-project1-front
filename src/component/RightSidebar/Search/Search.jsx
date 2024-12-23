@@ -31,9 +31,14 @@ function Search() {
             >
                 <OutlinedInput
                     sx={{
-                        bgcolor: 'white',
-                        height: '45px',
+                        '& .MuiInputBase-input::placeholder': {
+                            color: 'hsl(211, 20%, 53%)',
+                            opacity: 1
+                        },
+                        backgroundColor: 'rgb(241, 243, 245)',
+                        height: '43px',
                         width: '100%',
+                        borderColor: 'none'
                     }}
                     id="outlined-basic"
                     variant="outlined"

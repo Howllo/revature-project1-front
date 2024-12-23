@@ -9,6 +9,7 @@ export default function SelectLanguage() {
     return (
         <Box
             sx={{
+                mx: '-10px',
                 display: 'flex',
                 flexDirection: 'row',
                 justifyContent: 'left',
@@ -16,7 +17,7 @@ export default function SelectLanguage() {
                 width: 'auto',
             }}
         >
-            <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+            <FormControl sx={{ minWidth: 120 }} size="small">
                 <Select
                     onChange={(e) => setLanguage(e.target.value)}
                     defaultValue={language}
@@ -30,8 +31,8 @@ export default function SelectLanguage() {
                             border: 'none'
                         }
                     }}
-                >
-                    <MenuItem value={'en-US'}><em>English (US)</em></MenuItem>
+                 variant="outline">
+                    <MenuItem value={'en-US'}>English (US)</MenuItem>
                     <MenuItem value={'en-GB'}>English (UK)</MenuItem>
                     <MenuItem value={'zh'}>中文 – Chinese</MenuItem>
                     <MenuItem value={'hi'}>हिन्दी – Hindi</MenuItem>

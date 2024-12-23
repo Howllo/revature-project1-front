@@ -1,7 +1,7 @@
 ﻿import {projectApi} from "../../../util/axios.js";
 import {useSignup} from "../Context/UseSignup.jsx";
 import Cookies from "js-cookie";
-import {useAuth} from "../../../util/auth/AuthProvider.jsx";
+import {useAuth} from "../../../util/auth/UseAuth.jsx";
 import axios from "axios";
 
 export const useSignupThreeValidation = () => {
@@ -35,16 +35,30 @@ export const useSignupThreeValidation = () => {
                 }
             )
 
-            Cookies.set('jwtToken', response.data.token, { expires: 7 });
-            Cookies.set('username', response.data.username, { expires: 7 });
-            Cookies.set('profile_pic', response.data.profilePicture, { expires: 7 });
+            Cookies.set('jwt', response.data.token, {
+                expires: 7,
+                sameSite: 'strict',
+                secure: true,
+            });
+            Cookies.set('username', response.data.username, {
+                expires: 7,
+                sameSite: 'strict',
+                secure: true,
+            });
+            Cookies.set('profile_pic', response.data.profilePicture, {
+                expires: 7,
+                sameSite: 'strict',
+                secure: false,
+            });
 
-            if(Cookies.get('jwtToken') !== undefined){
-                axios.defaults.headers.common['Authorization'] = Cookies.get('jwtToken');
+            if(Cookies.get('jwt') !== undefined){
+                axios.defaults.headers.common['Authorization'] = Cookies.get('jwt');
                 setIsAuthenticated(true);
             }
             return response.status === 201 || response.status === 200;
         } catch (error) {
+            Cookies.remove('jwt');
+            Cookies.remove('username');
             if(error.response && error.response.data.message){
                 console.log(`Status Error: ${error.status} - ${error.response.data.message}`);
             } else {

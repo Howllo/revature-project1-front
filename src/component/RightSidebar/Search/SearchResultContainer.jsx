@@ -1,20 +1,23 @@
 ﻿import {Box, Paper, Typography} from "@mui/material";
+import {HorizontalRule} from "@mui/icons-material";
 
 // eslint-disable-next-line react/prop-types
 const SearchResultContainer = ({searchWord, children}) => {
     return (
         <Paper
-            elevation={3}
+            elevation={2}
             sx={{
                 height: 'fit-content',
-                width: '93%',
+                width: '92%',
                 borderRadius: 1,
-                padding: 1,
+                padding: 1.25,
                 transition: 'all 0.3s ease',
                 marginTop: 2,
+                marginRight: 10,
                 display: 'flex',
                 flexDirection: 'column',
-                borderColor: '#007bff',
+                border: '1px solid',
+                borderColor: 'rgb(197, 207, 217)',
             }}
         >
             <Box
@@ -27,6 +30,9 @@ const SearchResultContainer = ({searchWord, children}) => {
                 <Typography
                     variant="body2"
                     sx={{
+                        fontSize: '14px',
+                        fontFamily: 'SF Pro Display, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif',
+                        fontWeight: 600,
                         wordWrap: 'break-word',
                         overflow: 'hidden',
                         width: '100%'
@@ -34,7 +40,17 @@ const SearchResultContainer = ({searchWord, children}) => {
                 >
                     Search for &#34;{searchWord}&#34;
                 </Typography>
-                <hr/>
+
+                <HorizontalRule
+                    sx={{
+                        marginTop: '10px',
+                        mx: -1.25,
+                        color: 'rgb(212,217,225)',
+                        width: '109%',
+                        height: '1.1px',
+                        backgroundColor: 'rgb(212,217,225)',
+                    }}
+                />
             </Box>
             <Box>{children}</Box>
         </Paper>

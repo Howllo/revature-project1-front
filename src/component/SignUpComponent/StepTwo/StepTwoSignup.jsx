@@ -3,11 +3,11 @@ import {SignUpBackNext} from "../Common/SignUpBackNext.jsx";
 import {UsernameField} from "./UsernameField.jsx";
 import SignupUsernamePresent from "./SignupUsernamePresent.jsx";
 import {useSignup} from "../Context/UseSignup.jsx";
-import useSignUpTwoValidation from "./useSignUpTwoValidation.js";
+import useSignupTwoValidation from "./useSignupTwoValidation.js";
 
 export default function StepTwoSignup() {
     const { data, step, setStep } = useSignup();
-    const { validateAll } = useSignUpTwoValidation();
+    const { validateAll } = useSignupTwoValidation();
 
     const handleNav = async () => {
         const isValid = await validateAll();
