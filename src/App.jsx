@@ -8,6 +8,12 @@ import {LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import {SignUpProvider} from "./component/SignUpComponent/Context/UseSignup.jsx";
 import {SighInProvider} from "./component/SigninComponent/Context/SignInProvider.jsx";
+import FeedPage from "./page/FeedPage.jsx";
+import NotificationsPage from "./page/NotificationsPage.jsx";
+import {NavProvider} from "./component/NavContext/NavContext.jsx";
+import ProfilePage from "./page/ProfilePage.jsx";
+import SettingPage from "./page/SettingPage.jsx";
+import {PostProvider} from "./component/Post/Context/PostProvider.jsx";
 
 
 function App() {
@@ -15,15 +21,38 @@ function App() {
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <AuthProvider>
             <Router>
-                <SignUpProvider>
-                    <SighInProvider>
-                        <Routes>
-                            <Route path="/" element={<HomePage/>}/>
-                            <Route path="/signin" element={<SigninPage/>}/>
-                            <Route path="/signup" element={<SignupPage/>}/>
-                        </Routes>
-                    </SighInProvider>
-                </SignUpProvider>
+                <NavProvider>
+                    <SignUpProvider>
+                        <SighInProvider>
+                            <PostProvider>
+                                <Routes>
+                                    <Route path="/" element={
+                                        <HomePage>
+                                            <FeedPage/>
+                                        </HomePage>
+                                    }/>
+                                    <Route path="/signin" element={<SigninPage/>}/>
+                                    <Route path="/signup" element={<SignupPage/>}/>
+                                    <Route path="/notification" element={
+                                        <HomePage>
+                                            <NotificationsPage/>
+                                        </HomePage>
+                                    }/>
+                                    <Route path="/profile" element={
+                                        <HomePage>
+                                            <ProfilePage/>
+                                        </HomePage>
+                                    }/>
+                                    <Route path="/setting" element={
+                                        <HomePage>
+                                            <SettingPage/>
+                                        </HomePage>
+                                    }/>
+                                </Routes>
+                            </PostProvider>
+                        </SighInProvider>
+                    </SignUpProvider>
+                </NavProvider>
             </Router>
         </AuthProvider>
       </LocalizationProvider>

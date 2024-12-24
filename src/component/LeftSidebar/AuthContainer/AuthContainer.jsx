@@ -1,20 +1,29 @@
-﻿import {Avatar, Box, Link} from "@mui/material";
+﻿import {Box} from "@mui/material";
+import UserAvatar from "../../AvatarComponent/UserAvatar.jsx";
 import Cookies from "js-cookie";
+import Navbar from "../../Navbar/Navbar.jsx";
 
 const AuthContainer = () => {
     return (
         <Box
             sx={{
                 display: 'flex',
+                width: '100%',
                 flexDirection: 'column',
-                justifyContent: 'center',
-                alignItems: 'center',
-                height: '100%',
+                justifyContent: 'flex-end',
+                alignItems: 'flex-end',
+                paddingRight: '20px',
             }}
         >
-            <Link to={"/" + Cookies.get("username")}>
-                <Avatar alt={name} src={Cookies.get("profile_pic")}/>
-            </Link>
+            <Box
+                sx={{
+                    paddingBottom: '20px',
+                    paddingRight: '60px',
+                }}
+            >
+                <UserAvatar username={Cookies.get('username')} image={Cookies.get('profile_pic')}/>
+            </Box>
+            <Navbar/>
         </Box>
     )
 }

@@ -11,7 +11,6 @@ export const AuthProvider = ({children}) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
 
-
     useEffect(() => {
         const verifyToken = async () => {
             if(Cookies.get('jwt') === undefined || Cookies.get('jwt') === null){

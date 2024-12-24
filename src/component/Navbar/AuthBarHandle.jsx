@@ -1,10 +1,9 @@
-﻿import {useAuth} from "../../../util/auth/UseAuth.jsx";
-import {UnauthContainer} from "../UnauthContainer/UnauthContainer.jsx";
-import AuthContainer from "../AuthContainer/AuthContainer.jsx";
+﻿import {useAuth} from "../../util/auth/UseAuth.jsx";
+import {UnauthContainer} from "../LeftSidebar/UnauthContainer/UnauthContainer.jsx";
+import AuthContainer from "../LeftSidebar/AuthContainer/AuthContainer.jsx";
 import {useEffect, useState} from "react";
-import {Box} from "@mui/material";
 
-export const Navbar = () => {
+export const AuthBarHandle = () => {
     const { isAuthenticated } = useAuth();
     const [, setForceUpdate] = useState({})
 
@@ -21,10 +20,6 @@ export const Navbar = () => {
     }
 
     return (
-        <Box>
-            {
-                handleNavDisplay()
-            }
-        </Box>
+        handleNavDisplay()
     )
 }
