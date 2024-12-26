@@ -7,7 +7,7 @@ import useSignIn from "./Context/UseSignin.jsx";
 
 export const useSignInValidation = () => {
     let navigate  = useNavigate();
-    const { setIsAuthenticated } = useAuth();
+    const { setIsAuthenticated, setUser } = useAuth();
     const { setCredentialsInvalid } = useSignIn();
 
     const setCookieOnBadRequest = () => {
@@ -83,6 +83,15 @@ export const useSignInValidation = () => {
                 sameSite: 'strict',
                 secure: false,
             });
+            Cookies.set('user_id', response.data.userId, {
+                expires: 7,
+                sameSite: 'strict',
+                secure: true,
+            })
+
+            if(Cookies.get('user_id')){
+                setUser(Cookies.get('user_id'));
+            }
 
             return response.status === 200;
         } catch (e) {

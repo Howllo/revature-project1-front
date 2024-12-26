@@ -63,6 +63,7 @@ function HomePage({children}) {
                     ref={containerRef}
                     sx={{
                         maxWidth: '90%',
+                        minWidth: '90%',
                         height: '100%',
                         overflowY: 'auto',
                         overflowX: 'hidden',

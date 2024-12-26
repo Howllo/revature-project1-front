@@ -3,11 +3,14 @@ import {HorizontalRule} from "@mui/icons-material";
 import ImageOutlinedIcon from "@mui/icons-material/ImageOutlined";
 import TheatersOutlinedIcon from "@mui/icons-material/TheatersOutlined";
 import YouTubeIcon from '@mui/icons-material/YouTube';
-import {usePost} from "./Context/UsePost.jsx";
+import {usePost} from "../Context/UsePost.jsx";
+import YouTubeDialog from "../CreatePost/YouTubeDialog.jsx";
+import {useState} from "react";
 
 
 const PostInteractiveBar = () => {
-    const {handleImageSelect} =usePost();
+    const {handleImageSelect, handleYouTubeSelect} = usePost();
+    const [dialogOpen, setDialogOpen] = useState(false);
 
     const VisuallyHiddenInput = styled('input')({
         clip: 'rect(0 0 0 0)',
@@ -107,6 +110,7 @@ const PostInteractiveBar = () => {
                 <Button
                     role={undefined}
                     component="label"
+                    onClick={() => setDialogOpen(true)}
                     sx={{
                         minWidth: '32px',
                         width: '32px',
@@ -125,6 +129,11 @@ const PostInteractiveBar = () => {
                     }
                 >
                 </Button>
+
+                <Box>
+                    {dialogOpen ? <YouTubeDialog setMedia={handleYouTubeSelect} handleClose={setDialogOpen}
+                                                 open={dialogOpen}/> : null}
+                </Box>
             </Box>
         </Box>
     )

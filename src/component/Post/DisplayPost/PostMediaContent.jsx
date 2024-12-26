@@ -1,9 +1,9 @@
 ﻿import {Box, Button} from "@mui/material";
 import PropTypes from 'prop-types';
-import {allowedImageTypes, allowedVideoTypes} from "../../util/MediaSupport.js";
+import {allowedImageTypes, allowedVideoTypes} from "../../../util/MediaSupport.js";
 import {useEffect, useState} from "react";
-import MediaBackdrop from "./MediaBackdrop.jsx";
-import {usePost} from "./Context/UsePost.jsx";
+import MediaBackdrop from "../MediaBackdrop.jsx";
+import {usePost} from "../Context/UsePost.jsx";
 
 const PostMediaContent = ({media, isVideo}) => {
     const {resetPost} = usePost();
@@ -84,7 +84,8 @@ const PostMediaContent = ({media, isVideo}) => {
                         <iframe width="560" height="315" src={youtube}
                                 title="YouTube video player"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                allowFullScreen></iframe>
+                                allowFullScreen>
+                        </iframe>
                 ) : null
             }
 

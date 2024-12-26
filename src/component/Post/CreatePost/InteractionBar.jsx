@@ -2,8 +2,28 @@
 import PropTypes from 'prop-types';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import {useEffect, useState} from "react";
+import {usePost} from "../Context/UsePost.jsx";
 
-const InteractionBar = ({likesNum, commentsNum}) => {
+const InteractionBar = ({ post, setPost }) => {
+    const [isLiked, setIsLiked] = useState(false)
+    const {likePost, getLikes, isUserLike} = usePost();
+
+    const handleLike = async () => {
+        const liked = await likePost(post.id)
+        setIsLiked(liked);
+        const likes = await getLikes(post.id);
+        setPost({
+            ...post,
+            likes: likes,
+        })
+    }
+
+    useEffect(() => {
+        setIsLiked(isUserLike());
+    }, []);
+
     return (
         <Box
             sx={{
@@ -11,14 +31,15 @@ const InteractionBar = ({likesNum, commentsNum}) => {
                 flexDirection: 'row',
                 height: '100%',
                 width: '100%',
+                justifyContent: 'space-between',
             }}
         >
+            <Box>
+            </Box>
             <Box
                 sx={{
                     display: 'flex',
                     flexDirection: 'row',
-                    marginLeft: '20%',
-                    width: '50%',
                 }}
             >
                 <Button
@@ -44,30 +65,40 @@ const InteractionBar = ({likesNum, commentsNum}) => {
                             color: 'rgb(66, 87, 108)'
                         }}
                     >
-                        {commentsNum}
+                        {post.commentsNum}
                     </Typography>
                 </Button>
             </Box>
 
             <Box
                 sx={{
-                    width: '50%',
                     display: 'flex',
                     flexDirection: 'row',
 
                 }}
             >
                 <Button
+                    onClick={handleLike}
                     sx={{
                         borderRadius: '20%',
                         alignItems: 'center',
                     }}
                 >
-                    <FavoriteBorder
-                        sx={{
-                            color: 'rgb(66, 87, 108)'
-                        }}
-                    />
+                    {
+                        isLiked
+                        ?
+                            <FavoriteIcon
+                                sx={{
+                                    color: 'rgb(255,68,91)'
+                                }}
+                            />
+                            :
+                            <FavoriteBorder
+                            sx={{
+                                color: 'rgb(66, 87, 108)'
+                            }}
+                        />
+                    }
                     <Typography
                         variant="h6"
                         fontFamily="Inter, sans-serif"
@@ -79,17 +110,19 @@ const InteractionBar = ({likesNum, commentsNum}) => {
                             color: 'rgb(66, 87, 108)'
                         }}
                     >
-                        {likesNum}
+                        {post.likesNum}
                     </Typography>
                 </Button>
+            </Box>
+            <Box>
             </Box>
         </Box>
     )
 }
 
 InteractionBar.propTypes = {
-    likesNum: PropTypes.number.isRequired,
-    commentsNum: PropTypes.number.isRequired,
+    post: PropTypes.object.isRequired,
+    setPost: PropTypes.func.isRequired,
 };
 
 export default InteractionBar;

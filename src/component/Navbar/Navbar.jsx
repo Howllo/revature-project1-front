@@ -7,11 +7,11 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
-import useNav from "../NavContext/UseNav.jsx";
+import useNav from "./NavContext/UseNav.jsx";
 import {Link} from "react-router-dom";
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import {useState} from "react";
-import CreatePost from "../Post/CreatePost.jsx";
+import CreatePost from "../Post/CreatePost/CreatePost.jsx";
 
 
 const Navbar = () => {

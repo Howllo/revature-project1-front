@@ -1,8 +1,11 @@
 ﻿import { OutlinedInput, Box } from "@mui/material";
+import {usePost} from "../Context/UsePost.jsx";
 
 export const PostTextField = () => {
+    const {setComment} = usePost();
+
     const handleEmailChange = (e) => {
-        console.log("handleEmailChange", e);
+        setComment(e.target.value);
     }
 
     return (

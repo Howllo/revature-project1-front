@@ -1,24 +1,31 @@
 ﻿import {Box, Button} from "@mui/material";
 import {Backdrop} from "@mui/material";
-import UserAvatar from "../AvatarComponent/UserAvatar.jsx";
+import UserAvatar from "../../AvatarComponent/UserAvatar.jsx";
 import Cookies from "js-cookie";
 import PostTextField from "./PostTextField.jsx";
-import PostMediaContent from "./PostMediaContent.jsx";
-import PostInteractiveBar from "./PostInteractiveBar.jsx";
-import {usePost} from "./Context/UsePost.jsx";
+import PostMediaContent from "../DisplayPost/PostMediaContent.jsx";
+import PostInteractiveBar from "../DisplayPost/PostInteractiveBar.jsx";
+import {usePost} from "../Context/UsePost.jsx";
 
 const CreatePost = ({handleOpen}) => {
-    const {resetPost, previewUrl, isVideo} = usePost();
+    const {resetPost, previewUrl, isVideo, submitPost, getPost} = usePost();
 
     const cancelPost = () => {
-        resetPost()
-        handleOpen()
+        resetPost();
+        handleOpen();
+    }
+
+    const handleSubmit = async () => {
+        handleOpen();
+        await submitPost(null);
+        resetPost();
+        getPost();
     }
 
     return (
         <Backdrop
             sx={{
-                zIndex: 9999,
+                zIndex: 1051,
             }}
             open
         >
@@ -62,6 +69,7 @@ const CreatePost = ({handleOpen}) => {
                             borderRadius: '20px',
                             textTransform: 'capitalize',
                         }}
+                        onClick={handleSubmit}
                     >
                         Post
                     </Button>

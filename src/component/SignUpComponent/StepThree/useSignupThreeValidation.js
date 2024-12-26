@@ -6,7 +6,7 @@ import axios from "axios";
 
 export const useSignupThreeValidation = () => {
     const { data, step, setStep  } = useSignup();
-    const { setIsAuthenticated } =  useAuth();
+    const { setIsAuthenticated, setUser } =  useAuth();
 
     const handleNav = async () => {
         const result = await handleSubmitRegister();
@@ -50,6 +50,15 @@ export const useSignupThreeValidation = () => {
                 sameSite: 'strict',
                 secure: false,
             });
+            Cookies.set('user_id', response.data.userId, {
+                expires: 7,
+                sameSite: 'strict',
+                secure: true,
+            })
+
+            if(Cookies.get('user_id')){
+                setUser(Cookies.get('user_id'));
+            }
 
             if(Cookies.get('jwt') !== undefined){
                 axios.defaults.headers.common['Authorization'] = Cookies.get('jwt');

@@ -1,5 +1,5 @@
 ﻿import {Backdrop, Box} from "@mui/material";
-import PostMediaContent from "./PostMediaContent.jsx";
+import PostMediaContent from "./DisplayPost/PostMediaContent.jsx";
 
 import PropTypes from 'prop-types';
 

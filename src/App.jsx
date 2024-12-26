@@ -10,7 +10,7 @@ import {SignUpProvider} from "./component/SignUpComponent/Context/UseSignup.jsx"
 import {SighInProvider} from "./component/SigninComponent/Context/SignInProvider.jsx";
 import FeedPage from "./page/FeedPage.jsx";
 import NotificationsPage from "./page/NotificationsPage.jsx";
-import {NavProvider} from "./component/NavContext/NavContext.jsx";
+import {NavProvider} from "./component/Navbar/NavContext/NavContext.jsx";
 import ProfilePage from "./page/ProfilePage.jsx";
 import SettingPage from "./page/SettingPage.jsx";
 import {PostProvider} from "./component/Post/Context/PostProvider.jsx";
