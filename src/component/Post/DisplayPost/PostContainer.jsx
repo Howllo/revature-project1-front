@@ -8,7 +8,7 @@ import PostMediaContent from "./PostMediaContent.jsx";
 import Cookies from "js-cookie";
 import {useState} from "react";
 
-const PostContainer = ({key, post}) => {
+const PostContainer = ({key, post, commentChildren}) => {
     const [savedPost, setSavedPost] = useState(post);
 
     const handleClick = () => {
@@ -106,6 +106,17 @@ const PostContainer = ({key, post}) => {
                     >
                         <InteractionBar post={savedPost} setPost={setSavedPost} likesNum={post.likesNum ? post.likesNum : 0} commentsNum={post.commentsNum ? post.commentsNum : 0}/>
                     </Box>
+
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            width: '95%',
+                            height: '100%',
+                        }}
+                    >
+                        {commentChildren}
+                    </Box>
                 </Box>
             </Card>
         </Box>
@@ -113,7 +124,6 @@ const PostContainer = ({key, post}) => {
 }
 
 PostContainer.propTypes = {
-    key: PropTypes.string,
     post: PropTypes.shape({
         id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
         username: PropTypes.string.isRequired,
@@ -125,6 +135,7 @@ PostContainer.propTypes = {
         likesNum: PropTypes.number,
         media: PropTypes.string,
     }).isRequired,
+    commentChildren: PropTypes.node
 };
 
 export default PostContainer;

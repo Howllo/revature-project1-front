@@ -5,24 +5,34 @@ import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import {useEffect, useState} from "react";
 import {usePost} from "../Context/UsePost.jsx";
+import CreatePost from "./CreatePost.jsx";
 
 const InteractionBar = ({ post, setPost }) => {
     const [isLiked, setIsLiked] = useState(false)
     const {likePost, getLikes, isUserLike} = usePost();
+    const [showCommentMenu, setShowCommentMenu] = useState()
 
     const handleLike = async () => {
-        const liked = await likePost(post.id)
+        const liked = await likePost(post.id);
         setIsLiked(liked);
         const likes = await getLikes(post.id);
         setPost({
             ...post,
             likes: likes,
-        })
-    }
+        });
+    };
 
     useEffect(() => {
-        setIsLiked(isUserLike());
-    }, []);
+        const checkLikeStatus = async () => {
+            const likeStatus = await isUserLike(post.id);
+            setIsLiked(likeStatus);
+        };
+        checkLikeStatus();
+    }, [post.likes, post.id, isUserLike]);
+
+    const handleComments =  () => {
+        setShowCommentMenu(true)
+    }
 
     return (
         <Box
@@ -47,6 +57,7 @@ const InteractionBar = ({ post, setPost }) => {
                         borderRadius: '20%',
                         alignItems: 'center',
                     }}
+                    onClick={handleComments}
                 >
                     <ChatBubbleOutlineIcon
                         sx={{
@@ -113,6 +124,8 @@ const InteractionBar = ({ post, setPost }) => {
                         {post.likesNum}
                     </Typography>
                 </Button>
+
+                {showCommentMenu ? <CreatePost handleOpen={setShowCommentMenu} child={post}/> : null }
             </Box>
             <Box>
             </Box>

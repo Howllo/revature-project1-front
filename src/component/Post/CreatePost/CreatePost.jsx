@@ -7,7 +7,7 @@ import PostMediaContent from "../DisplayPost/PostMediaContent.jsx";
 import PostInteractiveBar from "../DisplayPost/PostInteractiveBar.jsx";
 import {usePost} from "../Context/UsePost.jsx";
 
-const CreatePost = ({handleOpen}) => {
+const CreatePost = ({handleOpen, child}) => {
     const {resetPost, previewUrl, isVideo, submitPost, getPost} = usePost();
 
     const cancelPost = () => {
@@ -17,7 +17,11 @@ const CreatePost = ({handleOpen}) => {
 
     const handleSubmit = async () => {
         handleOpen();
-        await submitPost(null);
+        if(child === undefined || child === null) {
+            await submitPost(null);
+        } else {
+            await submitPost(child);
+        }
         resetPost();
         getPost();
     }

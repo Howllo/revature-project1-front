@@ -88,8 +88,10 @@ export const PostProvider = ({ children }) => {
                 mediaString = postData.previewUrl;
             }
 
+            console.log(parentPost);
+
             const postPayload = {
-                parentPost: parentPost || null,
+                postParent: parentPost || null,
                 user: {
                     id: Cookies.get('user_id')
                 },
@@ -217,7 +219,7 @@ export const PostProvider = ({ children }) => {
     const isUserLike = async (postId) => {
         const token = Cookies.get('jwt');
         try{
-            const response  = await projectApi.get(`/post/check/{postId}/like/${Cookies.get('user_id')}`, {
+            const response  = await projectApi.get(`/post/check/${postId}/like/${Cookies.get('user_id')}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
@@ -226,6 +228,22 @@ export const PostProvider = ({ children }) => {
             return response.data;
         } catch (e) {
             console.error('Error getting likes for post: ', e.message);
+        }
+    }
+
+    const getChildren = async (postId) => {
+        try {
+            const response  = await projectApi.get(`/post/${postId}/comments`, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+
+            console.log(response.data);
+
+            return response.data;
+        } catch (e) {
+            console.error('Error getting likes for post: ', e.status);
         }
     }
 
@@ -246,7 +264,8 @@ export const PostProvider = ({ children }) => {
         editPost,
         likePost,
         getLikes,
-        isUserLike
+        isUserLike,
+        getChildren
     };
 
     return (
