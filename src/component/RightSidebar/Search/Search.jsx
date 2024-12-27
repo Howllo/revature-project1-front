@@ -1,11 +1,39 @@
 ﻿import {Box, IconButton, InputAdornment, OutlinedInput} from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import CancelIcon from '@mui/icons-material/Cancel';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import SearchResultContainer from "./SearchResultContainer.jsx";
+import SearchResult from "./SearchResult.jsx";
+import {projectApi} from "../../../util/axios.js";
 
+//TODO: Make the API and states context. There is issue with either:
+// * Timing of context initialization
+// * Order of provider nesting
+// * Potential circular dependencies
+// * Race conditions in state updates
 function Search() {
     const [searchTerm, setSearchTerm] = useState('')
+    const [searchResults, setSearchResults] = useState([]);
+
+    const searchUsername = async (username) => {
+        if(username === undefined) {
+            console.log(`This username was: ${username}`);
+            return [];
+        }
+
+        try {
+            const response = await projectApi.get(`/search/user/${username}`,
+                {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+            return response.data || [];
+        } catch (e) {
+            console.error('Error getting search results for user: ', e.status);
+        }
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -16,10 +44,22 @@ function Search() {
         setSearchTerm('')
     }
 
+    useEffect(() => {
+        const checkUsernameDebounced = setTimeout(async () => {
+            if (searchTerm && searchTerm.length >= 3) {
+                const results = await searchUsername(searchTerm);
+                setSearchResults(results || []);
+            }
+        }, 500);
+
+        return () => clearTimeout(checkUsernameDebounced);
+    }, [searchTerm]);
+
     return (
         <Box sx={{
             minHeight: '100vh',
-            width: '250px',
+            maxWidth: '250px',
+            width: 'auto',
             margin: 0,
             padding: 0
         }}>
@@ -68,9 +108,13 @@ function Search() {
                 />
 
                 {
-                    searchTerm !== '' ? <SearchResultContainer searchWord={searchTerm}/> : null
+                    searchTerm.length > 0 ? <SearchResultContainer searchWord={searchTerm} children =
+                        {
+                            searchResults.map((result) => (
+                                <SearchResult key={result.id} user={result}/>
+                            ))
+                        }/> : null
                 }
-
             </Box>
         </Box>
     )

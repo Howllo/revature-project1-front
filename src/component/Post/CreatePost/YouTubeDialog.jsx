@@ -60,7 +60,7 @@ const YouTubeDialog = ({setMedia, handleClose, open }) => {
     )
 }
 
-PostProvider.propTypes = {
+YouTubeDialog.propTypes = {
     setMedia: PropTypes.func,
     handleClose: PropTypes.func.isRequired,
     open: PropTypes.bool.isRequired,

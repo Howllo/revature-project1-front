@@ -3,7 +3,7 @@ import {Backdrop} from "@mui/material";
 import UserAvatar from "../../AvatarComponent/UserAvatar.jsx";
 import Cookies from "js-cookie";
 import PostTextField from "./PostTextField.jsx";
-import PostMediaContent from "../DisplayPost/PostMediaContent.jsx";
+import MediaContainer from "../DisplayPost/MediaContainer.jsx";
 import PostInteractiveBar from "../DisplayPost/PostInteractiveBar.jsx";
 import {usePost} from "../Context/UsePost.jsx";
 
@@ -112,7 +112,7 @@ const CreatePost = ({handleOpen, child}) => {
                         borderRadius: '50px',
                     }}
                 >
-                    {previewUrl ? <PostMediaContent media={previewUrl} isVideo={isVideo}/> : null}
+                    {previewUrl ? <MediaContainer media={previewUrl} isVideo={isVideo}/> : null}
                 </Box>
                 <PostInteractiveBar/>
             </Box>

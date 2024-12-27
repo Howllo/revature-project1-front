@@ -2,22 +2,25 @@
 import {HorizontalRule} from "@mui/icons-material";
 
 // eslint-disable-next-line react/prop-types
-const SearchResultContainer = ({searchWord, children}) => {
+const SearchResultContainer = ({key, searchWord, children}) => {
     return (
         <Paper
             elevation={2}
+            key={key}
             sx={{
                 height: 'fit-content',
                 width: '92%',
-                borderRadius: 1,
+                maxWidth: '92%',
+                borderRadius: 2,
                 padding: 1.25,
                 transition: 'all 0.3s ease',
-                marginTop: 2,
+                marginTop: 1,
                 marginRight: 10,
                 display: 'flex',
                 flexDirection: 'column',
                 border: '1px solid',
                 borderColor: 'rgb(197, 207, 217)',
+                overflow: 'hidden'
             }}
         >
             <Box
@@ -33,9 +36,9 @@ const SearchResultContainer = ({searchWord, children}) => {
                         fontSize: '14px',
                         fontFamily: 'SF Pro Display, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif',
                         fontWeight: 600,
+                        width: '100%',
                         wordWrap: 'break-word',
                         overflow: 'hidden',
-                        width: '100%'
                     }}
                 >
                     Search for &#34;{searchWord}&#34;
@@ -52,9 +55,16 @@ const SearchResultContainer = ({searchWord, children}) => {
                     }}
                 />
             </Box>
-            <Box>{children}</Box>
+            <Box
+                sx={{
+                    width: '100%',
+                    overflow: 'hidden'
+                }}
+            >
+                {children}
+            </Box>
         </Paper>
-    )
-}
+    );
+};
 
 export default SearchResultContainer;

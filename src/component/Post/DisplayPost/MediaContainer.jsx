@@ -5,7 +5,7 @@ import {useEffect, useState} from "react";
 import MediaBackdrop from "../MediaBackdrop.jsx";
 import {usePost} from "../Context/UsePost.jsx";
 
-const PostMediaContent = ({media, isVideo}) => {
+const MediaContainer = ({media, isVideo}) => {
     const {resetPost} = usePost();
     const [youtube, setYoutube] = useState("")
     const [mediaType, setMediaType] = useState('');
@@ -95,9 +95,9 @@ const PostMediaContent = ({media, isVideo}) => {
     )
 }
 
-PostMediaContent.propTypes = {
+MediaContainer.propTypes = {
     media: PropTypes.string.isRequired,
     isVideo: PropTypes.bool
 };
 
-export default PostMediaContent;
+export default MediaContainer;

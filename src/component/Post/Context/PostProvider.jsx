@@ -238,9 +238,6 @@ export const PostProvider = ({ children }) => {
                     'Content-Type': 'application/json'
                 }
             })
-
-            console.log(response.data);
-
             return response.data;
         } catch (e) {
             console.error('Error getting likes for post: ', e.status);

@@ -3,7 +3,6 @@ import RightSidebar from "../component/RightSidebar/RightSidebar.jsx";
 import {AuthBarHandle} from "../component/Navbar/AuthBarHandle.jsx";
 import FAB_ScrollReset from "../component/LeftSidebar/AuthContainer/FAB_ScrollReset.jsx";
 import {useEffect, useRef, useState} from "react";
-
 import PropTypes from 'prop-types';
 
 function HomePage({children}) {

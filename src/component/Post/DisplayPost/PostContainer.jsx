@@ -4,7 +4,7 @@ import PostText from "../PostText.jsx";
 import PostInformationText from "./PostInformationText.jsx";
 import InteractionBar from "../CreatePost/InteractionBar.jsx";
 import PropTypes from 'prop-types';
-import PostMediaContent from "./PostMediaContent.jsx";
+import MediaContainer from "./MediaContainer.jsx";
 import Cookies from "js-cookie";
 import {useState} from "react";
 
@@ -91,7 +91,7 @@ const PostContainer = ({key, post, commentChildren}) => {
                             maxWidth: '600px',
                         }}
                     >
-                        {post.media ? <PostMediaContent media={post.media}/> : null}
+                        {post.media ? <MediaContainer media={post.media}/> : null}
                     </Box>
 
                     <Box
