@@ -13,7 +13,7 @@ const SettingsPage = () => {
         }
 
         try {
-            const response = await projectApi.get(`/user/${username}/display_name`, {
+            const response = await projectApi.put(`/user/${username}/display_name`, {
                     displayName: displayName
                 },
                 {
