@@ -39,7 +39,7 @@ function App() {
                                             <NotificationsPage/>
                                         </HomePage>
                                     }/>
-                                    <Route path="/profile" element={
+                                    <Route path="/:username" element={
                                         <HomePage>
                                             <ProfilePage/>
                                         </HomePage>

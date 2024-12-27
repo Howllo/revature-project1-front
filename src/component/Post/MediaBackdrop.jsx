@@ -1,5 +1,5 @@
 ﻿import {Backdrop, Box} from "@mui/material";
-import PostMediaContent from "./DisplayPost/PostMediaContent.jsx";
+import MediaContainer from "./DisplayPost/MediaContainer.jsx";
 
 import PropTypes from 'prop-types';
 
@@ -23,7 +23,7 @@ const MediaBackdrop = ({media, open, handleClose}) => {
                         width: '70%',
                     }}
                 >
-                    <PostMediaContent media={media}/>
+                    <MediaContainer media={media}/>
                 </Box>
             </Backdrop>
         </Box>

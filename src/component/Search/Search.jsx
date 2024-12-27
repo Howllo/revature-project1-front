@@ -4,7 +4,7 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import {useEffect, useState} from "react";
 import SearchResultContainer from "./SearchResultContainer.jsx";
 import SearchResult from "./SearchResult.jsx";
-import {projectApi} from "../../../util/axios.js";
+import {projectApi} from "../../util/axios.js";
 
 //TODO: Make the API and states context. There is issue with either:
 // * Timing of context initialization
@@ -111,7 +111,7 @@ function Search() {
                     searchTerm.length > 0 ? <SearchResultContainer searchWord={searchTerm} children =
                         {
                             searchResults.map((result) => (
-                                <SearchResult key={result.id} user={result}/>
+                                <SearchResult key={result.id} user={result} setSearchTerm={setSearchTerm}/>
                             ))
                         }/> : null
                 }
